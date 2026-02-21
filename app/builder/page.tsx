@@ -106,17 +106,17 @@ export default function BuilderPage() {
   };
 
   return (
-    <div className="min-h-[calc(100vh-4rem)] bg-slate-950 text-slate-50 relative overflow-hidden font-sans selection:bg-indigo-500/30">
+    <div className="min-h-[calc(100vh-4rem)] bg-slate-950 text-slate-50 relative overflow-hidden font-sans selection:bg-indigo-500/30 print:bg-white print:text-black print:overflow-visible">
       {/* Background Ambience */}
-      <div className="fixed inset-0 z-0 pointer-events-none">
+      <div className="fixed inset-0 z-0 pointer-events-none print:hidden">
         <div className="absolute top-0 right-1/4 w-[40%] h-[40%] rounded-full bg-indigo-600/10 blur-[150px]" />
         <div className="absolute bottom-0 left-1/4 w-[40%] h-[40%] rounded-full bg-purple-600/10 blur-[150px]" />
         <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none mix-blend-overlay"></div>
       </div>
 
-      <div className="container max-w-4xl px-4 py-16 mx-auto relative z-10">
+      <div className="container max-w-4xl px-4 py-16 mx-auto relative z-10 print:p-0 print:m-0 print:max-w-none">
         {step < 5 && (
-          <div className="mb-12 text-center animate-fade-in-up">
+          <div className="mb-12 text-center animate-fade-in-up print:hidden">
             <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4 text-white">
               AI Resume Builder
             </h1>
@@ -396,8 +396,8 @@ export default function BuilderPage() {
         )}
 
         {step === 5 && generatedResume && (
-          <div className="space-y-8 animate-fade-in-up">
-            <div className="flex flex-col sm:flex-row justify-between items-center bg-white/5 border border-white/10 p-6 rounded-2xl backdrop-blur-xl shadow-2xl">
+          <div className="space-y-8 animate-fade-in-up print:space-y-0 print:m-0 print:p-0">
+            <div className="flex flex-col sm:flex-row justify-between items-center bg-white/5 border border-white/10 p-6 rounded-2xl backdrop-blur-xl shadow-2xl print:hidden">
               <div className="text-center sm:text-left mb-4 sm:mb-0">
                 <h2 className="text-2xl font-bold text-white mb-1 flex items-center justify-center sm:justify-start gap-2">
                   <Sparkles className="w-5 h-5 text-indigo-400" />
@@ -426,7 +426,7 @@ export default function BuilderPage() {
             </div>
 
             {/* Visual Document Preview */}
-            <div className="bg-white text-black p-8 sm:p-14 shadow-2xl rounded-xl mx-auto max-w-[850px] min-h-[1100px] border border-white/20 print:shadow-none print:border-none">
+            <div className="bg-white text-black p-8 sm:p-14 shadow-2xl rounded-xl mx-auto max-w-[850px] min-h-[1100px] border border-white/20 print:shadow-none print:border-none print:p-0 print:m-0 print:w-full print:max-w-none print:min-h-0 print:rounded-none">
               <ResumePreview data={generatedResume} />
             </div>
           </div>
