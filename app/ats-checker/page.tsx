@@ -13,7 +13,13 @@ import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { analyzeResume } from "./actions";
-import { CheckCircle2, XCircle, Loader2 } from "lucide-react";
+import {
+  CheckCircle2,
+  XCircle,
+  Loader2,
+  UploadCloud,
+  Target,
+} from "lucide-react";
 
 export default function AtsCheckerPage() {
   const [loading, setLoading] = useState(false);
@@ -38,163 +44,239 @@ export default function AtsCheckerPage() {
   }
 
   return (
-    <div className="container max-w-5xl px-4 py-12 mx-auto">
-      <div className="text-center mb-10">
-        <h1 className="text-4xl font-bold tracking-tight mb-3">
-          ATS Resume Checker
-        </h1>
-        <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-          Upload your resume and paste the job description you're applying for.
-          Our AI will simulate an Applicant Tracking System and provide a
-          compatibility score.
-        </p>
+    <div className="min-h-[calc(100vh-4rem)] bg-slate-950 text-slate-50 relative overflow-hidden font-sans selection:bg-indigo-500/30">
+      {/* Background Ambience */}
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-indigo-500/10 blur-[120px]" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-blue-600/10 blur-[120px]" />
+        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none mix-blend-overlay"></div>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-8 items-start">
-        <Card className="shadow-sm border-zinc-200 dark:border-zinc-800">
-          <CardHeader>
-            <CardTitle>Input Details</CardTitle>
-            <CardDescription>
-              Provide your current resume and the target job description.
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="space-y-2">
-                <Label htmlFor="resume">Resume (PDF)</Label>
-                <Input
-                  id="resume"
-                  name="resume"
-                  type="file"
-                  accept=".pdf"
-                  required
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="jobDescription">Target Job Description</Label>
-                <Textarea
-                  id="jobDescription"
-                  name="jobDescription"
-                  placeholder="Paste the job requirements and description here..."
-                  className="min-h-[250px] resize-none"
-                  required
-                />
-              </div>
-              <Button
-                type="submit"
-                className="w-full h-12 text-md"
-                disabled={loading}
-              >
-                {loading ? (
-                  <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                ) : (
-                  "Analyze Resume"
-                )}
-              </Button>
-            </form>
-          </CardContent>
-        </Card>
+      <div className="container max-w-5xl px-6 py-16 mx-auto relative z-10">
+        <div className="text-center mb-16 animate-fade-in-up">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-6 shadow-xl">
+            <Target className="w-4 h-4 text-indigo-400" />
+            <span className="text-sm font-medium text-slate-300">
+              Precision Analysis
+            </span>
+          </div>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6">
+            ATS{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">
+              Score Checker
+            </span>
+          </h1>
+          <p className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed">
+            Upload your resume and paste the target job description. Our
+            deep-learning engine will simulate an ATS scan and give you a
+            granular compatibility report.
+          </p>
+        </div>
 
-        <div className="space-y-6">
-          {!result && !error && !loading && (
-            <Card className="h-full bg-zinc-50 dark:bg-zinc-900/50 border-dashed flex flex-col items-center justify-center p-12 text-center text-muted-foreground">
-              <CheckCircle2 className="h-12 w-12 mb-4 text-zinc-300 dark:text-zinc-700" />
-              <p>Your analysis results will appear here.</p>
-            </Card>
-          )}
+        <div className="grid md:grid-cols-2 gap-8 items-start">
+          <Card className="bg-white/5 border-white/10 shadow-2xl backdrop-blur-xl relative overflow-hidden rounded-3xl">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/10 blur-[50px] rounded-full pointer-events-none"></div>
 
-          {loading && (
-            <Card className="p-12 flex flex-col items-center justify-center text-center space-y-4">
-              <Loader2 className="h-10 w-10 animate-spin text-primary" />
-              <p className="text-lg font-medium">Analyzing your resume...</p>
-              <p className="text-sm text-muted-foreground">
-                Extracting text and comparing context.
-              </p>
-            </Card>
-          )}
-
-          {error && (
-            <Card className="border-red-200 bg-red-50 dark:bg-red-950/20 dark:border-red-900 p-6">
-              <div className="flex items-start gap-4">
-                <XCircle className="h-6 w-6 text-red-600 dark:text-red-400 mt-0.5" />
-                <div>
-                  <h3 className="font-medium text-red-900 dark:text-red-300">
-                    Analysis Error
-                  </h3>
-                  <p className="text-red-700 dark:text-red-400 mt-1">{error}</p>
+            <CardHeader className="pb-4 border-b border-white/5 relative z-10">
+              <CardTitle className="text-2xl font-bold text-white">
+                Input Details
+              </CardTitle>
+              <CardDescription className="text-slate-400 text-base">
+                Provide your materials for analysis.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="pt-6 relative z-10">
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="space-y-3">
+                  <Label
+                    htmlFor="resume"
+                    className="text-sm font-medium text-slate-300"
+                  >
+                    Resume (PDF)
+                  </Label>
+                  <div className="relative group">
+                    <Input
+                      id="resume"
+                      name="resume"
+                      type="file"
+                      accept=".pdf"
+                      required
+                      className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+                    />
+                    <div className="flex items-center justify-center w-full h-24 px-4 transition bg-black/20 border-2 border-dashed border-white/20 rounded-xl group-hover:border-indigo-500/50 group-hover:bg-indigo-500/5 text-slate-400 group-hover:text-indigo-300">
+                      <div className="flex flex-col items-center space-y-2">
+                        <UploadCloud className="w-6 h-6" />
+                        <span className="text-sm font-medium text-center">
+                          Click to upload or drag & drop
+                        </span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </Card>
-          )}
 
-          {result && (
-            <Card className="overflow-hidden border-zinc-200 dark:border-zinc-800 shadow-lg">
-              <div
-                className={`p-6 text-center text-white ${result.score >= 80 ? "bg-green-600" : result.score >= 60 ? "bg-amber-500" : "bg-red-500"}`}
-              >
-                <h3 className="text-lg font-medium opacity-90 mb-1">
-                  ATS Match Score
+                <div className="space-y-3">
+                  <Label
+                    htmlFor="jobDescription"
+                    className="text-sm font-medium text-slate-300"
+                  >
+                    Target Job Description
+                  </Label>
+                  <Textarea
+                    id="jobDescription"
+                    name="jobDescription"
+                    placeholder="Paste the exact job requirements here..."
+                    className="min-h-[200px] resize-none bg-black/20 border-white/10 text-white placeholder:text-white/30 focus-visible:ring-indigo-500/50 focus-visible:border-indigo-500/50 rounded-xl p-4"
+                    required
+                  />
+                </div>
+
+                <div className="pt-2">
+                  <Button
+                    type="submit"
+                    className="w-full h-14 text-base font-semibold bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl shadow-[0_0_30px_-5px_rgba(79,70,229,0.3)] transition-all border-0"
+                    disabled={loading}
+                  >
+                    {loading ? (
+                      <>
+                        <Loader2 className="mr-3 h-5 w-5 animate-spin" />
+                        Analyzing via AI Engine...
+                      </>
+                    ) : (
+                      "Start Analysis"
+                    )}
+                  </Button>
+                </div>
+              </form>
+            </CardContent>
+          </Card>
+
+          <div className="space-y-6">
+            {!result && !error && !loading && (
+              <Card className="h-full min-h-[500px] bg-white/5 border-dashed border-white/10 flex flex-col items-center justify-center p-12 text-center text-slate-500 rounded-3xl backdrop-blur-md">
+                <div className="p-6 bg-white/5 rounded-full mb-6 ring-1 ring-white/10">
+                  <Target className="h-12 w-12 text-slate-600" />
+                </div>
+                <h3 className="text-xl font-medium text-slate-300 mb-2">
+                  Awaiting Input
                 </h3>
-                <div className="text-6xl font-extrabold tracking-tighter">
-                  {result.score}
-                  <span className="text-3xl opacity-70">%</span>
+                <p className="max-w-xs leading-relaxed">
+                  Your granular AI analysis report will appear here once
+                  processed.
+                </p>
+              </Card>
+            )}
+
+            {loading && (
+              <Card className="h-full min-h-[500px] p-12 flex flex-col items-center justify-center text-center space-y-6 bg-white/5 border-white/10 rounded-3xl backdrop-blur-md">
+                <div className="relative">
+                  <div className="absolute inset-0 bg-indigo-500 blur-xl opacity-20 rounded-full animate-pulse"></div>
+                  <Loader2 className="h-14 w-14 animate-spin text-indigo-400 relative z-10" />
                 </div>
-              </div>
-              <CardContent className="p-6 space-y-6">
                 <div>
-                  <h4 className="font-semibold text-lg mb-2">
-                    Feedback summary
-                  </h4>
-                  <p className="text-muted-foreground leading-relaxed">
-                    {result.feedback}
+                  <h3 className="text-xl font-bold text-white mb-2">
+                    Simulating ATS Scan
+                  </h3>
+                  <p className="text-slate-400 leading-relaxed">
+                    Extracting keywords, mapping contexts, and calculating match
+                    probability...
                   </p>
                 </div>
+              </Card>
+            )}
 
-                <div className="grid sm:grid-cols-2 gap-6">
-                  <div>
-                    <h4 className="font-semibold text-sm mb-3 flex items-center text-green-600 dark:text-green-400">
-                      <CheckCircle2 className="h-4 w-4 mr-1.5" /> Matching
-                      Keywords
-                    </h4>
-                    <div className="flex flex-wrap gap-2">
-                      {result.matchingKeywords?.map((kw: string, i: number) => (
-                        <span
-                          key={i}
-                          className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300"
-                        >
-                          {kw}
-                        </span>
-                      )) || (
-                        <span className="text-sm text-muted-foreground italic">
-                          None found
-                        </span>
-                      )}
-                    </div>
+            {error && (
+              <Card className="border border-red-500/30 bg-red-950/20 p-6 rounded-3xl backdrop-blur-md shadow-[0_0_30px_-5px_rgba(220,38,38,0.2)]">
+                <div className="flex items-start gap-4">
+                  <div className="p-2 bg-red-500/20 rounded-full">
+                    <XCircle className="h-6 w-6 text-red-400" />
                   </div>
-
                   <div>
-                    <h4 className="font-semibold text-sm mb-3 flex items-center text-red-600 dark:text-red-400">
-                      <XCircle className="h-4 w-4 mr-1.5" /> Missing Keywords
-                    </h4>
-                    <div className="flex flex-wrap gap-2">
-                      {result.missingKeywords?.map((kw: string, i: number) => (
-                        <span
-                          key={i}
-                          className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300"
-                        >
-                          {kw}
-                        </span>
-                      )) || (
-                        <span className="text-sm text-muted-foreground italic">
-                          None found
-                        </span>
-                      )}
-                    </div>
+                    <h3 className="font-semibold text-red-300 mb-1 text-lg">
+                      Analysis Failed
+                    </h3>
+                    <p className="text-red-400/80 leading-relaxed">{error}</p>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
-          )}
+              </Card>
+            )}
+
+            {result && (
+              <Card className="overflow-hidden border border-white/10 bg-white/5 shadow-2xl rounded-3xl backdrop-blur-xl animate-fade-in-up">
+                <div
+                  className={`p-8 text-center relative overflow-hidden flex flex-col items-center justify-center ${result.score >= 80 ? "bg-gradient-to-br from-emerald-600/90 to-emerald-900/90" : result.score >= 60 ? "bg-gradient-to-br from-amber-500/90 to-amber-700/90" : "bg-gradient-to-br from-red-600/90 to-red-900/90"}`}
+                >
+                  <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
+                  <h3 className="text-lg font-medium text-white/90 tracking-wide uppercase mb-2 relative z-10">
+                    Match Probability
+                  </h3>
+                  <div className="text-7xl font-extrabold tracking-tighter text-white drop-shadow-md relative z-10">
+                    {result.score}
+                    <span className="text-4xl opacity-60 font-medium ml-1">
+                      %
+                    </span>
+                  </div>
+                </div>
+
+                <CardContent className="p-8 space-y-8 relative z-10">
+                  <div>
+                    <h4 className="font-bold text-xl text-white mb-3">
+                      Executive Summary
+                    </h4>
+                    <p className="text-slate-300 leading-relaxed bg-black/20 p-4 rounded-2xl border border-white/5">
+                      {result.feedback}
+                    </p>
+                  </div>
+
+                  <div className="grid sm:grid-cols-2 gap-6">
+                    <div className="bg-emerald-950/20 p-5 rounded-2xl border border-emerald-500/20">
+                      <h4 className="font-semibold text-base mb-4 flex items-center text-emerald-400">
+                        <CheckCircle2 className="h-5 w-5 mr-2" /> Matching
+                        Keywords
+                      </h4>
+                      <div className="flex flex-wrap gap-2">
+                        {result.matchingKeywords?.map(
+                          (kw: string, i: number) => (
+                            <span
+                              key={i}
+                              className="inline-flex items-center px-3 py-1 rounded-lg text-xs font-semibold bg-emerald-500/10 text-emerald-300 border border-emerald-500/20"
+                            >
+                              {kw}
+                            </span>
+                          ),
+                        ) || (
+                          <span className="text-sm text-slate-500 italic">
+                            None identified
+                          </span>
+                        )}
+                      </div>
+                    </div>
+
+                    <div className="bg-red-950/20 p-5 rounded-2xl border border-red-500/20">
+                      <h4 className="font-semibold text-base mb-4 flex items-center text-red-400">
+                        <XCircle className="h-5 w-5 mr-2" /> Missing Keywords
+                      </h4>
+                      <div className="flex flex-wrap gap-2">
+                        {result.missingKeywords?.map(
+                          (kw: string, i: number) => (
+                            <span
+                              key={i}
+                              className="inline-flex items-center px-3 py-1 rounded-lg text-xs font-semibold bg-red-500/10 text-red-300 border border-red-500/20"
+                            >
+                              {kw}
+                            </span>
+                          ),
+                        ) || (
+                          <span className="text-sm text-slate-500 italic">
+                            None identified
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+          </div>
         </div>
       </div>
     </div>
