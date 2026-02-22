@@ -1,5 +1,6 @@
 "use client";
 
+import { BackgroundAmbience } from "@/components/landing/background-ambience";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -66,49 +67,49 @@ export default function OptimizerPage() {
   };
 
   return (
-    <div className="min-h-[calc(100vh-4rem)] bg-slate-950 text-slate-50 relative overflow-hidden font-sans selection:bg-purple-500/30 print:bg-white print:text-black print:overflow-visible">
+    <div className="min-h-[calc(100vh-4rem)] bg-slate-50 text-slate-900 relative overflow-hidden font-sans selection:bg-emerald-500/30 print:bg-white print:text-black print:overflow-visible">
       {/* Background Ambience */}
       <div className="fixed inset-0 z-0 pointer-events-none print:hidden">
-        <div className="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-purple-600/10 blur-[120px]" />
-        <div className="absolute bottom-[-20%] left-[-10%] w-[40%] h-[40%] rounded-full bg-indigo-600/10 blur-[120px]" />
+        <div className="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-emerald-500/10 blur-[120px]" />
+        <div className="absolute bottom-[-20%] left-[-10%] w-[40%] h-[40%] rounded-full bg-emerald-500/10 blur-[120px]" />
         <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none mix-blend-overlay"></div>
       </div>
 
       <div className="container max-w-5xl px-6 py-16 mx-auto relative z-10 print:p-0 print:m-0 print:max-w-none">
         <div className="text-center mb-16 animate-fade-in-up print:hidden">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-6 shadow-xl">
-            <Zap className="w-4 h-4 text-purple-400" />
-            <span className="text-sm font-medium text-slate-300">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/70 border border-slate-200 backdrop-blur-md mb-6 shadow-xl">
+            <Zap className="w-4 h-4 text-emerald-600" />
+            <span className="text-sm font-medium text-slate-700">
               Intelligent Rewrite Engine
             </span>
           </div>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6">
             AI Resume{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-400">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-teal-500">
               Optimizer
             </span>
           </h1>
-          <p className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
             Upload your existing resume and let our AI transform your bullet
             points into punchy, metric-driven achievements that recruiters love.
           </p>
         </div>
 
         {!result ? (
-          <Card className="max-w-2xl mx-auto bg-white/5 border-white/10 shadow-2xl backdrop-blur-xl relative overflow-hidden rounded-3xl animate-fade-in-up delay-100">
-            <div className="absolute top-0 left-0 w-32 h-32 bg-purple-500/10 blur-[50px] rounded-full pointer-events-none"></div>
+          <Card className="max-w-2xl mx-auto bg-white/70 border-slate-200 shadow-2xl backdrop-blur-xl relative overflow-hidden rounded-none animate-fade-in-up delay-100">
+            <div className="absolute top-0 left-0 w-32 h-32 bg-emerald-500/10 blur-[50px] rounded-full pointer-events-none"></div>
 
-            <CardHeader className="pb-4 border-b border-white/5 relative z-10">
-              <CardTitle className="text-2xl font-bold text-white">
+            <CardHeader className="pb-4 border-b border-slate-200 relative z-10">
+              <CardTitle className="text-2xl font-bold text-slate-900">
                 Upload Resume
               </CardTitle>
-              <CardDescription className="text-slate-400 text-base">
+              <CardDescription className="text-slate-600 text-base">
                 Ensure your resume is in a readable PDF format.
               </CardDescription>
             </CardHeader>
             <CardContent className="pt-6 relative z-10">
               {error && (
-                <div className="border border-red-500/30 bg-red-950/20 text-red-300 p-4 rounded-xl mb-6 text-sm flex items-center gap-3">
+                <div className="border border-red-500/30 bg-red-950/20 text-red-300 p-4 rounded-none mb-6 text-sm flex items-center gap-3">
                   <div className="p-1 bg-red-500/20 rounded-full">
                     <Zap className="w-5 h-5 text-red-400" />
                   </div>
@@ -119,7 +120,7 @@ export default function OptimizerPage() {
                 <div className="space-y-3">
                   <Label
                     htmlFor="resume"
-                    className="text-sm font-medium text-slate-300"
+                    className="text-sm font-medium text-slate-700"
                   >
                     Current Resume (PDF)
                   </Label>
@@ -132,7 +133,7 @@ export default function OptimizerPage() {
                       required
                       className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
                     />
-                    <div className="flex items-center justify-center w-full h-24 px-4 transition bg-black/20 border-2 border-dashed border-white/20 rounded-xl group-hover:border-purple-500/50 group-hover:bg-purple-500/5 text-slate-400 group-hover:text-purple-300">
+                    <div className="flex items-center justify-center w-full h-24 px-4 transition bg-white/50 border-2 border-dashed border-slate-200 rounded-none group-hover:border-emerald-500/50 group-hover:bg-emerald-500/5 text-slate-600 group-hover:text-emerald-600">
                       <div className="flex flex-col items-center space-y-2">
                         <UploadCloud className="w-6 h-6" />
                         <span className="text-sm font-medium text-center">
@@ -146,10 +147,10 @@ export default function OptimizerPage() {
                 <div className="space-y-3">
                   <Label
                     htmlFor="context"
-                    className="text-sm font-medium text-slate-300"
+                    className="text-sm font-medium text-slate-700"
                   >
                     Additional Context{" "}
-                    <span className="text-white/30 text-xs font-normal">
+                    <span className="text-slate-400 text-xs font-normal">
                       (Optional)
                     </span>
                   </Label>
@@ -157,14 +158,14 @@ export default function OptimizerPage() {
                     id="context"
                     name="context"
                     placeholder="e.g. Focus more on my leadership experience, or I'm targeting a Senior PM role..."
-                    className="min-h-[120px] resize-none bg-black/20 border-white/10 text-white placeholder:text-white/30 focus-visible:ring-purple-500/50 focus-visible:border-purple-500/50 rounded-xl p-4"
+                    className="min-h-[120px] resize-none bg-white/50 border-slate-200 text-slate-900 placeholder:text-slate-400 focus-visible:ring-emerald-500/50 focus-visible:border-emerald-500/50 rounded-none p-4"
                   />
                 </div>
 
                 <div className="pt-2">
                   <Button
                     type="submit"
-                    className="w-full h-14 text-base font-semibold bg-purple-600 hover:bg-purple-700 text-white rounded-xl shadow-[0_0_30px_-5px_rgba(147,51,234,0.3)] transition-all border-0"
+                    className="w-full h-14 text-base font-semibold bg-emerald-600 hover:bg-emerald-700 text-white rounded-none shadow-lg transition-all border-0"
                     disabled={loading}
                   >
                     {loading ? (
@@ -174,7 +175,7 @@ export default function OptimizerPage() {
                       </>
                     ) : (
                       <>
-                        <Sparkles className="mr-3 h-5 w-5 text-purple-200" />
+                        <Sparkles className="mr-3 h-5 w-5 text-emerald-100" />
                         Optimize Now
                       </>
                     )}
@@ -185,13 +186,13 @@ export default function OptimizerPage() {
           </Card>
         ) : (
           <div className="space-y-8 animate-fade-in-up print:space-y-0 print:m-0 print:p-0">
-            <div className="flex flex-col sm:flex-row justify-between items-center bg-white/5 border border-white/10 p-6 rounded-2xl backdrop-blur-xl shadow-2xl print:hidden">
+            <div className="flex flex-col sm:flex-row justify-between items-center bg-white/70 border border-slate-200 p-6 rounded-none backdrop-blur-xl shadow-2xl print:hidden">
               <div className="text-center sm:text-left mb-4 sm:mb-0">
-                <h2 className="text-2xl font-bold text-white mb-1 flex items-center justify-center sm:justify-start gap-2">
-                  <Sparkles className="w-5 h-5 text-purple-400" />
+                <h2 className="text-2xl font-bold text-slate-900 mb-1 flex items-center justify-center sm:justify-start gap-2">
+                  <Sparkles className="w-5 h-5 text-emerald-600" />
                   Optimization Complete!
                 </h2>
-                <p className="text-slate-400">
+                <p className="text-slate-600">
                   Your resume has been rewritten for maximum impact.
                 </p>
               </div>
@@ -199,13 +200,13 @@ export default function OptimizerPage() {
                 <Button
                   variant="outline"
                   onClick={() => setResult(null)}
-                  className="h-12 px-6 bg-white/5 border-white/10 hover:bg-white/10 hover:text-white text-slate-300 rounded-xl transition-all"
+                  className="h-12 px-6 bg-white/70 border-slate-200 hover:bg-slate-100 hover:text-emerald-700 text-slate-600 rounded-none transition-all"
                 >
                   Start Over
                 </Button>
                 <Button
                   onClick={handleDownloadAttempt}
-                  className="h-12 px-6 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl shadow-lg transition-all border-0"
+                  className="h-12 px-6 bg-emerald-600 hover:bg-emerald-700 text-white rounded-none shadow-lg transition-all border-0"
                 >
                   <Printer className="mr-2 w-5 h-5 opacity-80" />
                   Download PDF
@@ -213,7 +214,7 @@ export default function OptimizerPage() {
               </div>
             </div>
 
-            <div className="bg-white text-black p-8 sm:p-14 shadow-2xl rounded-xl mx-auto max-w-[850px] min-h-[1100px] border border-white/20 print:shadow-none print:border-none print:p-0 print:m-0 print:w-full print:max-w-none print:min-h-0 print:rounded-none">
+            <div className="bg-white text-black p-8 sm:p-14 shadow-2xl rounded-none mx-auto max-w-[850px] min-h-[1100px] border border-slate-200 print:shadow-none print:border-none print:p-0 print:m-0 print:w-full print:max-w-none print:min-h-0 print:rounded-none">
               <ResumePreview data={result} />
             </div>
           </div>
