@@ -43,7 +43,7 @@ Provide an evaluation in valid JSON format only, with the following structure:
 Ensure the output is ONLY the JSON object, with no markdown code blocks or extra text wrapper.`;
 
     const response = await aiClient.chat.completions.create({
-      model: 'gemini-2.5-flash',
+      model: 'gemini-3-flash-preview',
       messages: [{ role: 'user', content: prompt }],
       temperature: 0.2, // Low temperature for deterministic/analytical response
     });

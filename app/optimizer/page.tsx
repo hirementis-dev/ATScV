@@ -192,10 +192,28 @@ export default function OptimizerPage() {
 
                   <div className="space-y-3">
                     <Label
+                      htmlFor="targetJob"
+                      className="text-sm font-medium text-slate-700"
+                    >
+                      Target Job Description{" "}
+                      <span className="text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ml-1">
+                        Highly Recommended
+                      </span>
+                    </Label>
+                    <Textarea
+                      id="targetJob"
+                      name="targetJob"
+                      placeholder="Paste the job description you are applying for. The AI will strategically weave in matching keywords and skills..."
+                      className="min-h-[140px] resize-none bg-white/50 border-slate-200 text-slate-900 placeholder:text-slate-400 focus-visible:ring-emerald-500/50 focus-visible:border-emerald-500/50 rounded-none p-4"
+                    />
+                  </div>
+
+                  <div className="space-y-3">
+                    <Label
                       htmlFor="context"
                       className="text-sm font-medium text-slate-700"
                     >
-                      Additional Context{" "}
+                      Additional Instructions{" "}
                       <span className="text-slate-400 text-xs font-normal">
                         (Optional)
                       </span>
@@ -203,8 +221,8 @@ export default function OptimizerPage() {
                     <Textarea
                       id="context"
                       name="context"
-                      placeholder="e.g. Focus more on my leadership experience, or I'm targeting a Senior PM role..."
-                      className="min-h-[120px] resize-none bg-white/50 border-slate-200 text-slate-900 placeholder:text-slate-400 focus-visible:ring-emerald-500/50 focus-visible:border-emerald-500/50 rounded-none p-4"
+                      placeholder="e.g. Focus more on my leadership experience, keep it strictly under 1 page, switch my tone to be more analytical..."
+                      className="min-h-[80px] resize-none bg-white/50 border-slate-200 text-slate-900 placeholder:text-slate-400 focus-visible:ring-emerald-500/50 focus-visible:border-emerald-500/50 rounded-none p-4"
                     />
                   </div>
 
@@ -242,17 +260,17 @@ export default function OptimizerPage() {
                     Your resume has been rewritten for maximum impact.
                   </p>
                 </div>
-                <div className="flex gap-4 print:hidden">
+                <div className="flex flex-col sm:flex-row gap-4 print:hidden w-full sm:w-auto mt-4 sm:mt-0">
                   <Button
                     variant="outline"
                     onClick={() => setResult(null)}
-                    className="h-12 px-6 bg-white/70 border-slate-200 hover:bg-slate-100 hover:text-emerald-700 text-slate-600 rounded-none transition-all"
+                    className="h-12 px-6 bg-white/70 border-slate-200 hover:bg-slate-100 hover:text-emerald-700 text-slate-600 rounded-none transition-all w-full sm:w-auto"
                   >
-                    Start Over
+                    Optimize Another
                   </Button>
                   <Button
                     onClick={handleDownloadAttempt}
-                    className="h-12 px-6 bg-emerald-600 hover:bg-emerald-700 text-white rounded-none shadow-lg transition-all border-0"
+                    className="h-12 px-6 bg-emerald-600 hover:bg-emerald-700 text-white rounded-none shadow-lg transition-all border-0 w-full sm:w-auto"
                   >
                     <Printer className="mr-2 w-5 h-5 opacity-80" />
                     Download PDF
@@ -260,7 +278,7 @@ export default function OptimizerPage() {
                 </div>
               </div>
 
-              <div className="bg-white text-black p-8 sm:p-14 shadow-2xl rounded-none mx-auto max-w-[850px] min-h-[1100px] border border-slate-200 print:shadow-none print:border-none print:p-0 print:m-0 print:w-full print:max-w-none print:min-h-0 print:rounded-none">
+              <div className="bg-white text-black p-4 sm:p-10 md:p-14 shadow-2xl rounded-none mx-auto max-w-[850px] min-h-[1100px] border border-slate-200 print:shadow-none print:border-none print:p-0 print:m-0 print:w-full print:max-w-none print:min-h-0 print:rounded-none overflow-hidden">
                 <ResumePreview data={result} />
               </div>
             </div>

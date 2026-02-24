@@ -6,6 +6,7 @@ import { PDFParse } from 'pdf-parse';
 export async function optimizeResume(formData: FormData) {
   try {
     const resumeFile = formData.get('resume') as File | null;
+    const targetJob = formData.get('targetJob') as string | null;
     const additionalContext = formData.get('context') as string | null;
 
     if (!resumeFile) {
@@ -26,6 +27,10 @@ export async function optimizeResume(formData: FormData) {
     const prompt = `You are an expert Resume Writer and Career Coach. 
 Optimize the following resume content to be ATS-friendly, impactful, and results-oriented.
 
+${targetJob ? `TARGET JOB DESCRIPTION:
+${targetJob}
+=> INSTRUCTION: Heavily tailor the resume summary, skills, and bullet points to strategically emphasize keywords, tools, and requirements found in this job description without fabricating experience.` : ''}
+
 Target Context / User Request:
 ${additionalContext || 'Make it general but highly professional and optimized for modern ATS systems.'}
 
@@ -38,7 +43,10 @@ Provide the optimized resume in JSON format exactly matching this structure:
   "email": "<Extract or infer email>",
   "phone": "<Extract or infer phone>",
   "location": "<Extract or infer location>",
-  "targetRole": "<Extract or infer target role>",
+  "linkedin": "<Extract or infer linkedin link if present>",
+  "github": "<Extract or infer github link if present>",
+  "portfolio": "<Extract or infer portfolio link if present>",
+  "targetRole": "<Extract or infer target role based on experience or job description>",
   "summary": "<Optimized professional summary paragraph>",
   "experience": [
     {
@@ -47,6 +55,18 @@ Provide the optimized resume in JSON format exactly matching this structure:
       "duration": "<dates>",
       "bullets": [
         "<optimized resume bullet starting with an action verb, highlighting impact/metrics>",
+        ...
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "<project name>",
+      "description": "<short project description>",
+      "liveLink": "<optional live link or empty>",
+      "githubLink": "<optional github link or empty>",
+      "bullets": [
+        "<optimized bullet point describing the technical implementation and outcome>",
         ...
       ]
     }
@@ -60,7 +80,7 @@ Provide the optimized resume in JSON format exactly matching this structure:
 Ensure the output is ONLY the JSON object, with no markdown wrappers or extra text. Make the language strong, professional, and action-oriented.`;
 
     const response = await aiClient.chat.completions.create({
-      model: 'gemini-2.5-flash',
+      model: 'gemini-3-flash-preview',
       messages: [{ role: 'user', content: prompt }],
       temperature: 0.6, 
     });

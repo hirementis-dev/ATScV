@@ -45,7 +45,7 @@ Provide the output in JSON format with the following structure:
 Ensure the output is ONLY the JSON object, with no markdown wrappers or extra text. Make the language strong, professional, and action-oriented.`;
 
     const response = await aiClient.chat.completions.create({
-      model: 'gemini-2.5-flash',
+      model: 'gemini-3-flash-preview',
       messages: [{ role: 'user', content: prompt }],
       temperature: 0.7, 
     });

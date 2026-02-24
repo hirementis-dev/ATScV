@@ -21,21 +21,21 @@ export function Footer() {
             </p>
             <div className="flex items-center gap-4 pt-2">
               <Link
-                href="#"
+                href="https://x.com/Suprabhat_3" target="_blank"
                 className="w-10 h-10 flex items-center justify-center bg-white border border-slate-200 text-slate-500 hover:text-emerald-600 hover:border-emerald-200 hover:bg-emerald-50 transition-all"
               >
                 <Twitter className="w-5 h-5" />
                 <span className="sr-only">Twitter</span>
               </Link>
               <Link
-                href="#"
+                href="https://github.com/Suprabhat3" target="_blank"
                 className="w-10 h-10 flex items-center justify-center bg-white border border-slate-200 text-slate-500 hover:text-emerald-600 hover:border-emerald-200 hover:bg-emerald-50 transition-all"
               >
                 <Github className="w-5 h-5" />
                 <span className="sr-only">GitHub</span>
               </Link>
               <Link
-                href="#"
+                href="https://www.linkedin.com/in/suprabhatt" target="_blank"
                 className="w-10 h-10 flex items-center justify-center bg-white border border-slate-200 text-slate-500 hover:text-emerald-600 hover:border-emerald-200 hover:bg-emerald-50 transition-all"
               >
                 <Linkedin className="w-5 h-5" />

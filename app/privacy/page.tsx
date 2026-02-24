@@ -142,10 +142,10 @@ export default function PrivacyPolicyPage() {
                   privacy practices, please contact us at:
                   <br />
                   <a
-                    href="mailto:hello@atscv.com"
+                    href="mailto:suprabhat.work@gmail.com"
                     className="text-emerald-600 hover:text-emerald-700 font-semibold mt-2 inline-block"
                   >
-                    hello@atscv.com
+                    suprabhat.work@gmail.com
                   </a>
                 </p>
               </section>
