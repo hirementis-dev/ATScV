@@ -24,6 +24,18 @@ Provide the output in JSON format with the following structure:
       ]
     }
   ],
+  "projects": [
+    {
+      "name": "<project name>",
+      "description": "<short project description>",
+      "liveLink": "<optional live link or empty>",
+      "githubLink": "<optional github link or empty>",
+      "bullets": [
+        "<optimized bullet point describing the technical implementation and outcome>",
+        ...
+      ]
+    }
+  ],
   "education": [ // format nicely 
     { "institution": "...", "degree": "...", "year": "..." }
   ],
