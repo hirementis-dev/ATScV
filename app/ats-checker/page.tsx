@@ -27,6 +27,7 @@ export default function AtsCheckerPage() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
+  const [fileName, setFileName] = useState<string | null>(null);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -35,6 +36,18 @@ export default function AtsCheckerPage() {
     setResult(null);
 
     const formData = new FormData(e.currentTarget);
+
+    const file = formData.get("resume") as File;
+    if (
+      file &&
+      file.type !== "application/pdf" &&
+      !file.name.toLowerCase().endsWith(".pdf")
+    ) {
+      setError("Please upload a valid PDF file.");
+      setLoading(false);
+      return;
+    }
+
     const res = await analyzeResume(formData);
 
     if (res.error) {
@@ -115,13 +128,42 @@ export default function AtsCheckerPage() {
                         type="file"
                         accept=".pdf"
                         required
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+                          if (file) {
+                            if (
+                              file.type !== "application/pdf" &&
+                              !file.name.toLowerCase().endsWith(".pdf")
+                            ) {
+                              setError("Please upload a PDF file.");
+                              e.target.value = "";
+                              setFileName(null);
+                            } else {
+                              setFileName(file.name);
+                              setError(null);
+                            }
+                          } else {
+                            setFileName(null);
+                          }
+                        }}
                         className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+                        title={fileName || "Upload PDF"}
                       />
-                      <div className="flex items-center justify-center w-full h-24 px-4 transition bg-white/50 border-2 border-dashed border-slate-200 rounded-none group-hover:border-emerald-500/50 group-hover:bg-emerald-500/5 text-slate-600 group-hover:text-emerald-600">
+                      <div
+                        className={`flex items-center justify-center w-full h-24 px-4 transition bg-white/50 border-2 border-dashed rounded-none ${fileName ? "border-emerald-500/50 bg-emerald-500/5" : "border-slate-200 group-hover:border-emerald-500/50 group-hover:bg-emerald-500/5"} text-slate-600 group-hover:text-emerald-600`}
+                      >
                         <div className="flex flex-col items-center space-y-2">
-                          <UploadCloud className="w-6 h-6" />
+                          <UploadCloud
+                            className={`w-6 h-6 ${fileName ? "text-emerald-600" : ""}`}
+                          />
                           <span className="text-sm font-medium text-center">
-                            Click to upload or drag & drop
+                            {fileName ? (
+                              <span className="text-emerald-600 font-semibold">
+                                {fileName}
+                              </span>
+                            ) : (
+                              "Click to upload or drag & drop"
+                            )}
                           </span>
                         </div>
                       </div>
@@ -139,7 +181,7 @@ export default function AtsCheckerPage() {
                       id="jobDescription"
                       name="jobDescription"
                       placeholder="Paste the exact job requirements here..."
-                      className="min-h-[200px] resize-none bg-white/50 border-slate-200 text-slate-900 placeholder:text-slate-400 focus-visible:ring-indigo-500/50 focus-visible:border-emerald-500/50 rounded-none p-4"
+                      className="min-h-[200px] resize-none bg-white/50 border-slate-200 text-slate-900 placeholder:text-slate-400 focus-visible:ring-teal-500/50 focus-visible:border-emerald-500/50 rounded-none p-4"
                       required
                     />
                   </div>
