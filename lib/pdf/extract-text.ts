@@ -1,26 +1,29 @@
 'use server';
 
-import { randomUUID } from 'node:crypto';
-import { tmpdir } from 'node:os';
-import { join } from 'node:path';
-import { unlink, writeFile } from 'node:fs/promises';
-
-async function extractWithLangChain(file: File): Promise<string> {
-  const { PDFLoader } = await import(
-    '@langchain/community/document_loaders/fs/pdf'
-  );
-
-  const arrayBuffer = await file.arrayBuffer();
-  const tempPdfPath = join(tmpdir(), `resume-${randomUUID()}.pdf`);
+async function extractWithPdfJs(file: File): Promise<string> {
+  const pdfjs = await import('pdfjs-dist/legacy/build/pdf.mjs');
+  const data = new Uint8Array(await file.arrayBuffer());
+  const loadingTask = pdfjs.getDocument({ data });
+  const doc = await loadingTask.promise;
 
   try {
-    await writeFile(tempPdfPath, Buffer.from(arrayBuffer));
+    const chunks: string[] = [];
 
-    const loader = new PDFLoader(tempPdfPath, { splitPages: false });
-    const docs = await loader.load();
-    return docs.map((doc) => doc.pageContent).join('\n\n').trim();
+    for (let pageNum = 1; pageNum <= doc.numPages; pageNum += 1) {
+      const page = await doc.getPage(pageNum);
+      const textContent = await page.getTextContent();
+
+      const pageText = textContent.items
+        .map((item: any) => ('str' in item ? item.str : ''))
+        .join(' ')
+        .trim();
+
+      if (pageText) chunks.push(pageText);
+    }
+
+    return chunks.join('\n\n').trim();
   } finally {
-    await unlink(tempPdfPath).catch(() => undefined);
+    await loadingTask.destroy();
   }
 }
 
@@ -39,10 +42,10 @@ async function extractWithPdfParse(file: File): Promise<string> {
 
 export async function extractPdfText(file: File): Promise<string> {
   try {
-    const langChainText = await extractWithLangChain(file);
-    if (langChainText) return langChainText;
+    const pdfJsText = await extractWithPdfJs(file);
+    if (pdfJsText) return pdfJsText;
   } catch (error) {
-    console.error('LangChain PDF extraction failed:', error);
+    console.error('pdfjs-dist extraction failed:', error);
   }
 
   const fallbackText = await extractWithPdfParse(file);
