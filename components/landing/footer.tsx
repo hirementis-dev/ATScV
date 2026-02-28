@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Github, Twitter, Linkedin, Mail, MapPin, Phone } from "lucide-react";
+import { Github, Twitter, Linkedin, Mail, MapPin, Globe } from "lucide-react";
 
 export function Footer() {
   return (
@@ -21,21 +21,24 @@ export function Footer() {
             </p>
             <div className="flex items-center gap-4 pt-2">
               <Link
-                href="https://x.com/Suprabhat_3" target="_blank"
+                href="https://x.com/Suprabhat_3"
+                target="_blank"
                 className="w-10 h-10 flex items-center justify-center bg-white border border-slate-200 text-slate-500 hover:text-emerald-600 hover:border-emerald-200 hover:bg-emerald-50 transition-all"
               >
                 <Twitter className="w-5 h-5" />
                 <span className="sr-only">Twitter</span>
               </Link>
               <Link
-                href="https://github.com/Suprabhat3" target="_blank"
+                href="https://github.com/Suprabhat3"
+                target="_blank"
                 className="w-10 h-10 flex items-center justify-center bg-white border border-slate-200 text-slate-500 hover:text-emerald-600 hover:border-emerald-200 hover:bg-emerald-50 transition-all"
               >
                 <Github className="w-5 h-5" />
                 <span className="sr-only">GitHub</span>
               </Link>
               <Link
-                href="https://www.linkedin.com/in/suprabhatt" target="_blank"
+                href="https://www.linkedin.com/in/suprabhatt"
+                target="_blank"
                 className="w-10 h-10 flex items-center justify-center bg-white border border-slate-200 text-slate-500 hover:text-emerald-600 hover:border-emerald-200 hover:bg-emerald-50 transition-all"
               >
                 <Linkedin className="w-5 h-5" />
@@ -91,7 +94,8 @@ export function Footer() {
             <ul className="space-y-4 text-slate-600">
               <li>
                 <Link
-                  href="#"
+                  href="https://blog.suprabhat.site"
+                  target="_blank"
                   className="hover:text-emerald-600 transition-colors inline-block"
                 >
                   Blog
@@ -107,7 +111,8 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="#"
+                  href="https://hirementis.site"
+                  target="_blank"
                   className="hover:text-emerald-600 transition-colors inline-block"
                 >
                   Interview Prep
@@ -115,7 +120,7 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="#"
+                  href="/help-center"
                   className="hover:text-emerald-600 transition-colors inline-block"
                 >
                   Help Center
@@ -131,18 +136,18 @@ export function Footer() {
             <ul className="space-y-4 text-slate-600">
               <li className="flex items-start gap-3">
                 <Mail className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" />
-                <span>hello@atscv.com</span>
+                <span>suprabhat.work@gmail.com</span>
               </li>
               <li className="flex items-start gap-3">
-                <Phone className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" />
-                <span>+1 (555) 123-4567</span>
+                <Globe className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" />
+                <span className="hover:text-green-600 transition-colors"><a href="https://new.suprabhat.site" target="_blank">Portfolio</a></span>
               </li>
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" />
                 <span>
-                  123 AI Boulevard
+                  in a quite place
                   <br />
-                  Tech District, CA 94107
+                  somewhere on Earth
                 </span>
               </li>
             </ul>
